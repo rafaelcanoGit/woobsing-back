@@ -10,11 +10,11 @@ use App\Models\Usuario;
 class UsuarioController extends Controller
 {
     
-    public function index(Request $request){ //se busca según el texto ingresado, se retorna la vista con condiciones de búsqueda
+    public function index(Request $request){ 
         $users = DB::table('usuarios')->get();
         return json_encode($users) ;
     }
-    public function store(Request $request){ //almacenar el objeto del modelo en nuestra tabla en la database.
+    public function store(Request $request){ 
         $usuario = new Usuario;
         $usuario->nombre = $request->get('nombre');
         $usuario->apellido = $request->get('apellido');
@@ -23,8 +23,7 @@ class UsuarioController extends Controller
         $usuario->direccion = $request->get('direccion');
         $usuario->save();
     }
-    public function update(Request $request, $usuario_id){ //almacenar el objeto del modelo en nuestra tabla en la database.
-        // $usuario = DB::table('usuarios')->where('usuario_id', $usuario_id)->first();
+    public function update(Request $request, $usuario_id){
         $usuario = Usuario::findOrFail($usuario_id);
         $usuario->nombre = $request->get('nombre');
         $usuario->apellido = $request->get('apellido');
